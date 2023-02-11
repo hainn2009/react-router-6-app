@@ -4,7 +4,7 @@ import "./index.css";
 import { createBrowserRouter, createRoutesFromElements, RouterProvider } from "react-router-dom";
 import Root, { loader as rootLoader, action as createContactAction } from "./routes/root";
 import ErrorPage from "./error-page";
-import Contact, { loader as contactLoader } from "./routes/contact";
+import Contact, { loader as contactLoader, action as updateFavoriteAction } from "./routes/contact";
 import EditContact, { action as updateContactAction } from "./routes/edit";
 import { action as destroyContactAction } from "./routes/destroy";
 import Index from "./routes";
@@ -17,22 +17,28 @@ const router = createBrowserRouter([
         loader: rootLoader,
         action: createContactAction,
         children: [
-            { index: true, element: <Index /> },
             {
-                path: "contacts/:contactId",
-                element: <Contact />,
-                loader: contactLoader,
-            },
-            {
-                path: "contacts/:contactId/edit",
-                element: <EditContact />,
-                loader: contactLoader,
-                action: updateContactAction,
-            },
-            {
-                path: "contacts/:contactId/destroy",
-                action: destroyContactAction,
-                errorElement: <div>There was an error</div>,
+                errorElement: <ErrorPage />,
+                children: [
+                    { index: true, element: <Index /> },
+                    {
+                        path: "contacts/:contactId",
+                        element: <Contact />,
+                        loader: contactLoader,
+                        action: updateFavoriteAction,
+                    },
+                    {
+                        path: "contacts/:contactId/edit",
+                        element: <EditContact />,
+                        loader: contactLoader,
+                        action: updateContactAction,
+                    },
+                    {
+                        path: "contacts/:contactId/destroy",
+                        action: destroyContactAction,
+                        errorElement: <div>There was an error</div>,
+                    },
+                ],
             },
         ],
     },
