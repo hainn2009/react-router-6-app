@@ -24,7 +24,7 @@ export default function Root() {
     useEffect(() => {
         // Vẫn phải có cái này vì q thay đổi nhưng nó chỉ là defaultValue nên nó không thể update ô text được
         // Một là làm thế này hoặc có thể dung useState.
-        // const [query, setQuery] = useState(q);
+        // const [query, setQuery] = useState(q);;
         document.getElementById("q").value = q;
     }, [q]);
     return (
