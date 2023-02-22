@@ -7,7 +7,7 @@ import ErrorPage from "./error-page";
 import Contact, { loader as contactLoader, action as updateFavoriteAction } from "./routes/contact";
 import EditContact, { action as updateContactAction } from "./routes/edit";
 import { action as destroyContactAction } from "./routes/destroy";
-// import Index from "./routes";
+import Index from "./routes";
 
 const router = createBrowserRouter([
     {
